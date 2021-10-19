@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CalculadoraDinamica
 {
@@ -24,50 +12,38 @@ namespace CalculadoraDinamica
         {
             InitializeComponent();
 
-            TextBlock th;
-            Viewbox vb;
-            Button boton;
-            int tag = 1;
-            for (int i = 1; i <= 3; i++)
+            int numeroCorrespondiente = 1;
+            for (int fila = 1; fila < 4; fila++)
             {
-                for (int j = 0; j <= 2; j++)
+                for (int columna = 0; columna < 3; columna++)
                 {
-                    th = new TextBlock
-                    {
-                        Text = tag.ToString()
 
-                    };
+                    //Creamos y configuramos el botón
+                    Button boton = new Button();
+                    Grid.SetRow(boton, fila);
+                    Grid.SetColumn(boton, columna);
+                    boton.Margin = new Thickness(5);
+                    boton.Click += Button_Click;
+                    boton.Tag = numeroCorrespondiente;
 
-                    vb = new Viewbox
-                    {
-                        Child = th
-                    };
+                    //Creamos y configuramos el contenido del botón
+                    TextBlock texto = new TextBlock();
+                    texto.Text = numeroCorrespondiente.ToString();
+                    Viewbox box = new Viewbox();
+                    box.Child = texto;
+                    boton.Content = box;
 
-                    boton = new Button
-                    {
-                        Content = vb
-                        Tag = tag.ToString()
-                    };
-
-                    Grid.SetColumn(boton, j);
-                    Grid.SetRow(boton, i);
-                    tag++;
+                    numeroCorrespondiente++;
+                    //Introducimos el botón en el Grid
+                    PrincipalGrid.Children.Add(boton);
                 }
             }
+        }
 
-            Button boton0 = new Button();
-            boton0.Content = 0;
-            boton0.Tag = 0;
-            Grid.SetColumn(boton0, 0);
-            Grid.SetRow(boton0, 4);
-            Grid.SetColumnSpan(boton0, 3);
-        }    
-}
-    
-        
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        resultadoTextBlock.Text += ((Button)sender).Tag.ToString();
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ResultadoTextBlock.Text += ((Button)sender).Tag.ToString();
+        }
     }
 }
-
