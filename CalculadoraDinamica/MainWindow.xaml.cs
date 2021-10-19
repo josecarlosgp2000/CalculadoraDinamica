@@ -24,19 +24,34 @@ namespace CalculadoraDinamica
         {
             InitializeComponent();
 
+            TextBlock th;
+            Viewbox vb;
+            Button boton;
             int tag = 1;
             for (int i = 1; i <= 3; i++)
             {
-                for (int j = 0; j<= 2; j++)
+                for (int j = 0; j <= 2; j++)
                 {
-                    Button boton = new Button();
-                    boton.Content = tag;
-                    boton.Tag = tag;
+                    th = new TextBlock
+                    {
+                        Text = tag.ToString()
+
+                    };
+
+                    vb = new Viewbox
+                    {
+                        Child = th
+                    };
+
+                    boton = new Button
+                    {
+                        Content = vb
+                        Tag = tag.ToString()
+                    };
+
                     Grid.SetColumn(boton, j);
                     Grid.SetRow(boton, i);
                     tag++;
-
-                    
                 }
             }
 
@@ -46,10 +61,13 @@ namespace CalculadoraDinamica
             Grid.SetColumn(boton0, 0);
             Grid.SetRow(boton0, 4);
             Grid.SetColumnSpan(boton0, 3);
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            resultadoTextBlock.Text += ((Button)sender).Tag.ToString();
-        }
+        }    
+}
+    
+        
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        resultadoTextBlock.Text += ((Button)sender).Tag.ToString();
     }
 }
+

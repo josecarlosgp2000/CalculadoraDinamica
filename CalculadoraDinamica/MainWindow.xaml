@@ -13,7 +13,7 @@
             <EventSetter Event="Click"  Handler="Button_Click"></EventSetter>
         </Style>
     </Window.Resources>
-    <Grid Margin="5">
+    <Grid Margin="5" x:Name="gridPrincipal">
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
